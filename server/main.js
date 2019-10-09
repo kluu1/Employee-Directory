@@ -8,7 +8,7 @@ Meteor.startup(() => {
   const numberRecords = Employees.find({}).count();
 
   if (!numberRecords) {
-    // Generate some data
+    // Generate some data with faker
     _.times(5000, () => {
       const { name, email, phone } = helpers.createCard();
 
@@ -20,4 +20,8 @@ Meteor.startup(() => {
       });
     });
   }
+
+  Meteor.publish('employees', function() {
+    return Employees.find({}, { limit: 20 });
+  });
 });
