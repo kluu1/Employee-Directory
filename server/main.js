@@ -4,11 +4,11 @@ import { Employees } from '../imports/collections/employees';
 import { image, helpers } from 'faker';
 
 Meteor.startup(() => {
-  // Check to see if data exists in the collection
+  // Check to see if data exists in the collection on startup
   const numberRecords = Employees.find({}).count();
 
+  // If no data, generate some data with faker
   if (!numberRecords) {
-    // Generate some data with faker
     _.times(5000, () => {
       const { name, email, phone } = helpers.createCard();
 
@@ -21,7 +21,7 @@ Meteor.startup(() => {
     });
   }
 
-  Meteor.publish('employees', function() {
-    return Employees.find({}, { limit: 20 });
+  Meteor.publish('employees', function (per_page) {
+    return Employees.find({}, { limit: per_page });
   });
 });

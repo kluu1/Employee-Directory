@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom';
 import EmployeeList from './components/employee_list';
 
 const App = () => {
-  return (
-    <EmployeeList />
-  );
+  return <EmployeeList />;
 };
 
 Meteor.startup(() => {
